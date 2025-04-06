@@ -1,0 +1,5 @@
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteCond %{HTTP_HOST} ^макс-дентист\.рф$ [NC]
+  RewriteRule ^robots\.txt$ robots-cyr.txt [L]
+</IfModule>

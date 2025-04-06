@@ -20,15 +20,16 @@
     })
     (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
 
-    ym(100731704, "init", {
+    ym(100778814, "init", {
       clickmap: true,
       trackLinks: true,
       accurateTrackBounce: true,
-      trackHash: true
+      webvisor: true,
+      ecommerce: "dataLayer"
     });
   </script>
   <noscript>
-    <div><img src="https://mc.yandex.ru/watch/100731704" style="position:absolute; left:-9999px;" alt=""/></div>
+    <div><img src="https://mc.yandex.ru/watch/100778814" style="position:absolute; left:-9999px;" alt=""/></div>
   </noscript>
   <!-- /Yandex.Metrika counter -->
   <meta name="description"
@@ -36,7 +37,9 @@
   <meta name="keywords"
         content="стоматолог ортопед Москва, виниры Петровско-Разумовское, протезирование зубов, врач Максим Андреевич">
   <meta name="author" content="Доктор Максим Андреевич">
-  <link rel="canonical" href="https://max-dentist.ru">
+  <link rel="canonical" href="https://max-dentist.ru/"/>
+  <link rel="alternate" hreflang="ru" href="https://макс-дентист.рф/"/>
+  <link rel="alternate" hreflang="x-default" href="https://max-dentist.ru/"/>
 
   <!-- Open Graph / Social Media -->
   <meta property="og:title" content="Доктор Максим Андреевич - стоматолог-ортопед">
@@ -59,7 +62,7 @@
         crossorigin="anonymous" referrerpolicy="no-referrer">
 
   <!-- Favicon -->
-  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="apple-touch-icon" type="image/png" sizes="180x180" href="/apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
   <link rel="icon" type="image/png" sizes="192x192" href="/android-chrome-192x192.png">
@@ -504,36 +507,51 @@
   </div>
 </div>
 
-<!-- Schema Markup -->
 <script type="application/ld+json">
   {
     "@context": "https://schema.org",
-    "@type": "Dentist",
-    "name": "Максим Андреевич",
-    "image": "https://max-dentist.ru/img/doctor-main.webp",
+    "@type": "DentalClinic",
+    "name": {
+      "@language": "ru",
+      "@value": "Доктор Максим Андреевич"
+    },
+    "description": {
+      "@language": "ru",
+      "@value": "Стоматолог-ортопед с 20-летним опытом. Виниры, коронки, протезирование зубов."
+    },
     "address": {
       "@type": "PostalAddress",
-      "addressLocality": "Москва",
-      "streetAddress": "Район м. Петровско-Разумовское"
+      "streetAddress": {
+        "@language": "ru",
+        "@value": "Дмитровское шоссе, д.34, к.1"
+      },
+      "addressLocality": {
+        "@language": "ru",
+        "@value": "Москва"
+      },
+      "postalCode": "127238",
+      "addressCountry": "RU"
     },
-    "telephone": "+79262471783",
-    "sameAs": [
-      "https://t.me/stommax777",
-      "https://wa.me/+79262471783"
-    ],
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": "55.839749",
+      "longitude": "37.573483"
+    },
     "openingHoursSpecification": {
       "@type": "OpeningHoursSpecification",
-      "dayOfWeek": [
-        "Monday",
-        "Tuesday",
-        "Wednesday",
-        "Thursday",
-        "Friday"
-      ],
+      "dayOfWeek": {
+        "@language": "ru",
+        "@value": "Понедельник,Вторник,Среда,Четверг,Пятница"
+      },
       "opens": "10:00",
       "closes": "20:00"
     },
-    "priceRange": "$$"
+    "telephone": "+79262471783",
+    "priceRange": "$$$",
+    "sameAs": [
+      "https://t.me/stommax777",
+      "https://yandex.ru/maps/org/ваш-id"
+    ]
   }
 </script>
 

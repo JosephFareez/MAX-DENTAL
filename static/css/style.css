@@ -138,6 +138,7 @@
   align-items: center;
   justify-content: center;
   max-width: 800px;
+  height: 500px;
   margin: 2rem auto 0;
 }
 
@@ -1153,7 +1154,7 @@ section[id] {
     width: auto;
   }
 
-  /* Центрирование карточек в разделе ценностного предложения */
+
   .value-grid {
     grid-template-columns: 1fr;
     justify-items: center;
@@ -1177,6 +1178,7 @@ section[id] {
     flex-direction: column;
     text-align: center;
     padding: 1rem;
+    margin-bottom: 2rem;
   }
 
   .guarantee-banner i {
@@ -1184,9 +1186,27 @@ section[id] {
   }
 
   .rating-banner {
-    flex-direction: column;
-    text-align: center;
+    margin-top: 2rem;
+    width: 100%;
     padding: 1rem;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+
+  .rating-banner > div {
+    width: 100% !important;
+    max-width: 100%;
+    height: auto;
+    min-height: 400px;
+  }
+
+  .rating-banner iframe {
+    width: 100% !important;
+    height: 400px !important;
   }
 }
 

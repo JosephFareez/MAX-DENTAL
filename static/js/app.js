@@ -1,48 +1,74 @@
 // =============================================
-// === Mobile Navigation =======================
+// === Enhanced Mobile Navigation =============
 // =============================================
+let menuButton = null;
+let navLinks = null;
+
 function setupMobileNav() {
-  // Check if we're on mobile view
   if (window.innerWidth <= 768) {
     const header = document.querySelector('.header');
     if (!header) return;
 
-    // Check if button already exists
-    if (document.querySelector('.mobile-menu-button')) return;
+    // Create menu button if not exists
+    if (!document.querySelector('.mobile-menu-button')) {
+      menuButton = document.createElement('button');
+      menuButton.className = 'mobile-menu-button';
+      menuButton.innerHTML = '<i class="fas fa-bars"></i>';
+      menuButton.setAttribute('aria-label', 'Открыть меню');
+      menuButton.setAttribute('aria-expanded', 'false');
+      header.prepend(menuButton);
 
-    const menuButton = document.createElement('button');
-    menuButton.className = 'mobile-menu-button';
-    menuButton.innerHTML = '<i class="fas fa-bars"></i>';
-    menuButton.setAttribute('aria-label', 'Открыть меню');
-    menuButton.setAttribute('aria-expanded', 'false');
+      // Add click handler for new button
+      menuButton.addEventListener('click', toggleMobileMenu);
+    }
 
-    header.prepend(menuButton);
+    // Initialize nav links reference
+    navLinks = document.querySelector('.nav-links');
 
-    menuButton.addEventListener('click', () => {
-      const navLinks = document.querySelector('.nav-links');
-      if (navLinks) {
-        const isExpanded = navLinks.classList.toggle('active');
-        menuButton.setAttribute('aria-expanded', isExpanded.toString());
-      }
-    });
+    // Add click-away listener
+    document.addEventListener('click', handleClickOutside);
+  }
+}
+
+function toggleMobileMenu() {
+  const isExpanded = navLinks.classList.toggle('active');
+  menuButton.setAttribute('aria-expanded', isExpanded.toString());
+
+  // Toggle body scroll lock
+  document.body.style.overflow = isExpanded ? 'hidden' : '';
+}
+
+function handleClickOutside(event) {
+  if (window.innerWidth > 768) return;
+
+  const isMenuButton = event.target.closest('.mobile-menu-button');
+  const isNavLink = event.target.closest('.nav-links a');
+  const isInMenu = event.target.closest('.nav-links');
+
+  if (isNavLink) {
+    toggleMobileMenu();
+    return;
+  }
+
+  if (!isInMenu && !isMenuButton && navLinks.classList.contains('active')) {
+    toggleMobileMenu();
   }
 }
 
 function handleWindowResize() {
-  const mobileBtn = document.querySelector('.mobile-menu-button');
-  const navLinks = document.querySelector('.nav-links');
-
   if (window.innerWidth > 768) {
-    // Remove mobile button if exists
-    if (mobileBtn) {
-      mobileBtn.remove();
+    // Cleanup mobile elements
+    if (menuButton) {
+      menuButton.removeEventListener('click', toggleMobileMenu);
+      menuButton.remove();
+      menuButton = null;
     }
-    // Ensure nav is visible on desktop
     if (navLinks) {
       navLinks.classList.remove('active');
+      document.body.style.overflow = '';
     }
-  } else if (window.innerWidth <= 768 && !mobileBtn) {
-    // Create mobile button if needed
+    document.removeEventListener('click', handleClickOutside);
+  } else {
     setupMobileNav();
   }
 }
@@ -52,14 +78,11 @@ function handleWindowResize() {
 // =============================================
 function setupSmoothScrolling() {
   document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    // Skip for external links or mailto/tel
     if (anchor.href.includes('http') ||
-        anchor.href.startsWith('mailto:') ||
-        anchor.href.startsWith('tel:')) {
-      return;
-    }
+      anchor.href.startsWith('mailto:') ||
+      anchor.href.startsWith('tel:')) return;
 
-    anchor.addEventListener('click', function(e) {
+    anchor.addEventListener('click', function (e) {
       e.preventDefault();
       const targetId = this.getAttribute('href');
       const target = document.querySelector(targetId);
@@ -74,9 +97,16 @@ function setupSmoothScrolling() {
           behavior: 'smooth'
         });
 
-        // Update URL without jumping
-        if (history.pushState) {
-          history.pushState(null, null, targetId);
+        if (history.pushState) history.pushState(null, null, targetId);
+
+        // Close mobile menu
+        if (window.innerWidth <= 768) {
+          const navLinks = document.querySelector('.nav-links');
+          const menuButton = document.querySelector('.mobile-menu-button');
+          if (navLinks?.classList.contains('active')) {
+            navLinks.classList.remove('active');
+            menuButton?.setAttribute('aria-expanded', 'false');
+          }
         }
       }
     });
@@ -94,23 +124,16 @@ function setupLazyLoading() {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
         const img = entry.target;
-        if (img.dataset.src) {
-          img.src = img.dataset.src;
-        }
+        if (img.dataset.src) img.src = img.dataset.src;
         img.classList.add('loaded');
         observer.unobserve(img);
       }
     });
-  }, {
-    rootMargin: '200px 0px' // Start loading before in viewport
-  });
+  }, {rootMargin: '200px 0px'});
 
   lazyImages.forEach(img => {
-    if (img.complete) {
-      img.classList.add('loaded');
-    } else {
-      observer.observe(img);
-    }
+    if (img.complete) img.classList.add('loaded');
+    else observer.observe(img);
   });
 }
 
@@ -128,52 +151,9 @@ function animateOnScroll() {
         observer.unobserve(entry.target);
       }
     });
-  }, {
-    threshold: 0.1,
-    rootMargin: '0px 0px -50px 0px'
-  });
+  }, {threshold: 0.1, rootMargin: '0px 0px -50px 0px'});
 
-  elementsToAnimate.forEach(el => {
-    observer.observe(el);
-  });
-}
-
-// =============================================
-// === Contact Options Toggle ==================
-// =============================================
-function setupContactButtons() {
-  const contactFixed = document.querySelector('.contact-fixed');
-  const contactButton = document.querySelector('.contact-button');
-  if (!contactFixed || !contactButton) return;
-
-  // Toggle visibility
-  contactButton.addEventListener('click', (e) => {
-    e.stopPropagation();
-    contactFixed.classList.toggle('active');
-  });
-
-  // Close when clicking outside
-  document.addEventListener('click', () => {
-    contactFixed.classList.remove('active');
-  });
-
-  // Prevent closing when clicking inside
-  contactFixed.addEventListener('click', (e) => {
-    e.stopPropagation();
-  });
-}
-
-// =============================================
-// === Appointment Button ======================
-// =============================================
-function setupAppointmentButton() {
-  const appointmentButton = document.querySelector('.appointment-button');
-  if (!appointmentButton) return;
-
-  appointmentButton.addEventListener('click', () => {
-    // Optional: Track button click for analytics
-    console.log('Appointment button clicked');
-  });
+  elementsToAnimate.forEach(el => observer.observe(el));
 }
 
 // =============================================
@@ -184,26 +164,14 @@ function setupCookieConsent() {
   const acceptButton = document.querySelector('.cookie-button');
   if (!cookieConsent || !acceptButton) return;
 
-  // Only show if not already accepted
   if (!localStorage.getItem('cookiesAccepted')) {
-    setTimeout(() => {
-      cookieConsent.classList.add('visible');
-    }, 2000);
+    setTimeout(() => cookieConsent.classList.add('visible'), 2000);
   }
 
-  // Handle accept button click
-  acceptButton.addEventListener('click', acceptCookies);
-}
-
-function acceptCookies() {
-  localStorage.setItem('cookiesAccepted', 'true');
-  const cookieConsent = document.getElementById('cookieConsent');
-  if (cookieConsent) {
+  acceptButton.addEventListener('click', () => {
+    localStorage.setItem('cookiesAccepted', 'true');
     cookieConsent.classList.remove('visible');
-  }
-
-  // Optional: Initialize analytics or tracking scripts here
-  // initAnalytics();
+  });
 }
 
 // =============================================
@@ -231,56 +199,25 @@ function initModal() {
     document.body.style.overflow = '';
   };
 
-  images.forEach(img => {
-    img.addEventListener('click', () => openModal(img.src, img.alt));
-  });
-
-  if (closeBtn) {
-    closeBtn.addEventListener('click', closeModal);
-  }
-
-  modalOverlay.addEventListener('click', (e) => {
-    if (e.target === modalOverlay) {
-      closeModal();
-    }
-  });
-
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') {
-      closeModal();
-    }
-  });
+  images.forEach(img => img.addEventListener('click', () => openModal(img.src, img.alt)));
+  closeBtn?.addEventListener('click', closeModal);
+  modalOverlay.addEventListener('click', (e) => e.target === modalOverlay && closeModal());
+  document.addEventListener('keydown', (e) => e.key === 'Escape' && closeModal());
 }
 
 // =============================================
-// === Initialize All Functions ================
+// === Initialization ==========================
 // =============================================
 document.addEventListener('DOMContentLoaded', () => {
-  // Mobile navigation
   setupMobileNav();
   window.addEventListener('resize', handleWindowResize);
-
-  // Other initializations
   setupSmoothScrolling();
   setupLazyLoading();
   animateOnScroll();
-  setupContactButtons();
-  setupAppointmentButton();
   setupCookieConsent();
   initModal();
-
-  // Floating contact button
-  const contactButton = document.querySelector('.contact-button');
-  if (contactButton) {
-    contactButton.addEventListener('click', () => {
-      const contactOptions = document.querySelector('.contact-options');
-      if (contactOptions) {
-        contactOptions.classList.toggle('visible');
-      }
-    });
-  }
 });
 
 window.addEventListener('load', () => {
-  // Any load-time animations or final adjustments
+  // Final adjustments after full page load
 });

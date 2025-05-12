@@ -73,6 +73,11 @@ function handleWindowResize() {
   }
 }
 
+function getHeaderHeight() {
+  const header = document.querySelector('.header');
+  return header ? header.offsetHeight : (window.innerWidth <= 768 ? 80 : 150);
+}
+
 // =============================================
 // === Smooth Scrolling ========================
 // =============================================
@@ -89,7 +94,7 @@ function setupSmoothScrolling() {
 
       if (target) {
         const header = document.querySelector('.header');
-        const headerHeight = header ? header.offsetHeight : 100;
+        const headerHeight = getHeaderHeight();
         const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - headerHeight;
 
         window.scrollTo({

@@ -167,16 +167,27 @@ function animateOnScroll() {
 function setupCookieConsent() {
   const cookieConsent = document.getElementById('cookieConsent');
   const acceptButton = document.querySelector('.cookie-button');
+
   if (!cookieConsent || !acceptButton) return;
 
-  if (!localStorage.getItem('cookiesAccepted')) {
+  const consentAccepted = localStorage.getItem('cookiesAccepted');
+
+  // If no consent or expired, show the banner after delay
+  if (!consentAccepted || isConsentExpired(consentAccepted)) {
     setTimeout(() => cookieConsent.classList.add('visible'), 2000);
   }
 
   acceptButton.addEventListener('click', () => {
-    localStorage.setItem('cookiesAccepted', 'true');
+    // Save current timestamp in localStorage
+    localStorage.setItem('cookiesAccepted', Date.now().toString());
     cookieConsent.classList.remove('visible');
   });
+}
+
+// Checks if consent is older than 30 days
+function isConsentExpired(timestamp) {
+  const sevenDaysInMs = 7 * 24 * 60 * 60 * 1000;
+  return Date.now() - parseInt(timestamp, 10) > sevenDaysInMs;
 }
 
 // =============================================

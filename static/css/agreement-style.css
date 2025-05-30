@@ -1,0 +1,84 @@
+:root {
+  --primary-color: #2c3e50;
+  --accent-color: #e67e22;
+  --bg-light: #f8f9fa;
+
+  --text-dark: #2d3436;
+  --text-light: #dfe6e9;
+  --font-sans: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+  padding: 20px;
+  font-family: var(--font-sans), sans-serif;
+  line-height: 1.6;
+  color: var(--text-dark);
+  background-color: var(--bg-light);
+  transition: background-color 0.3s, color 0.3s;
+  align-content: center;
+  margin: auto;
+}
+
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+header {
+
+  color: white;
+  padding: 1rem 2rem;
+  text-align: center;
+}
+
+.toggle-theme {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: none;
+  border: 1px solid var(--accent-color);
+  color: var(--accent-color);
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+ul {
+  padding-left: 1.5rem;
+}
+
+.contact {
+  color: var(--accent-color);
+  font-weight: bold;
+}
+
+.section {
+  margin-bottom: 2rem;
+  padding: 1rem;
+
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+footer {
+  text-align: center;
+  padding: 1rem;
+
+  color: var(--text-light);
+  font-size: 0.9rem;
+}
+
+@media (prefers-color-scheme: dark) {
+  body.dark-mode {
+
+    color: var(--text-light);
+  }
+
+}
+
+@media (max-width: 600px) {
+  .container {
+    padding: 1rem;
+  }
+}

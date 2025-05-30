@@ -221,6 +221,25 @@ function initModal() {
   document.addEventListener('keydown', (e) => e.key === 'Escape' && closeModal());
 }
 
+function updateTimer() {
+  const endDate = new Date('June 30, 2025 23:59:59').getTime();
+  const now = new Date().getTime();
+  const timeLeft = endDate - now;
+
+  // Расчет дней, часов, минут
+  const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+  const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+
+  // Обновление элементов
+  document.getElementById('days').textContent = days;
+  document.getElementById('hours').textContent = hours;
+  document.getElementById('minutes').textContent = minutes;
+
+  // Обновление каждую минуту
+  setTimeout(updateTimer, 60000);
+}
+
 // =============================================
 // === Initialization ==========================
 // =============================================

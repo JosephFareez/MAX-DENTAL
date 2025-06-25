@@ -1,1 +1,67 @@
-{"name":"","short_name":"","icons":[{"src":"/android-chrome-192x192.png","sizes":"192x192","type":"image/png"},{"src":"/android-chrome-512x512.png","sizes":"512x512","type":"image/png"}],"theme_color":"#ffffff","background_color":"#ffffff","display":"standalone"}
+{
+  "name": "Доктор Михайлов Максим Андреевич",
+  "short_name": "Стоматолог Михайлов",
+  "description": "Стоматолог-ортопед в Москве. Виниры, коронки, протезирование. 20 лет опыта. 4 минуты от м. Петровско-Разумовское",
+  "icons": [
+    {
+      "src": "/android-chrome-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/android-chrome-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "theme_color": "#2a7f8f",
+  "background_color": "#2a7f8f",
+  "display": "standalone",
+  "start_url": "/",
+  "scope": "/",
+  "orientation": "portrait-primary",
+  "lang": "ru",
+  "categories": ["health", "medical"],
+  "screenshots": [
+    {
+      "src": "/screenshot1.webp",
+      "sizes": "1080x1920",
+      "type": "image/webp",
+      "form_factor": "narrow"
+    },
+    {
+      "src": "/screenshot2.webp",
+      "sizes": "1920x1080",
+      "type": "image/webp",
+      "form_factor": "wide"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Записаться на приём",
+      "short_name": "Запись",
+      "description": "Записаться на консультацию к стоматологу",
+      "url": "/#contacts",
+      "icons": [
+        {
+          "src": "/icon-calendar.png",
+          "sizes": "192x192"
+        }
+      ]
+    },
+    {
+      "name": "Услуги и цены",
+      "short_name": "Услуги",
+      "description": "Посмотреть список услуг и стоимость",
+      "url": "/#pricing",
+      "icons": [
+        {
+          "src": "/icon-price.png",
+          "sizes": "192x192"
+        }
+      ]
+    }
+  ]
+}

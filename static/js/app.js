@@ -221,31 +221,58 @@ function initModal() {
   document.addEventListener('keydown', (e) => e.key === 'Escape' && closeModal());
 }
 
-function updateTimer() {
-  const endDate = new Date('June 30, 2025 23:59:59').getTime();
+// =============================================
+// === Promotions Countdown Timers =============
+// =============================================
+function updatePromoTimers() {
+  // Timer for cleaning promo (July 30)
+  const cleaningEndDate = new Date('July 30, 2025 23:59:59').getTime();
+  // Timer for implant promo (July 31)
+  const implantEndDate = new Date('July 31, 2025 23:59:59').getTime();
   const now = new Date().getTime();
-  const timeLeft = endDate - now;
 
-  // Остановка таймера при завершении
-  if (timeLeft <= 0) {
-    document.querySelector('.timer').innerHTML = 'Акция завершена!';
-    return;
+  // Cleaning promo timer
+  const cleaningTimeLeft = cleaningEndDate - now;
+  if (cleaningTimeLeft <= 0) {
+    const cleaningTimer = document.querySelector('#cleaning-promo .timer');
+    if (cleaningTimer) {
+      cleaningTimer.innerHTML = 'Акция завершена!';
+    }
+  } else {
+    const cleaningDays = Math.floor(cleaningTimeLeft / (1000 * 60 * 60 * 24));
+    const cleaningHours = Math.floor((cleaningTimeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const cleaningMinutes = Math.floor((cleaningTimeLeft % (1000 * 60 * 60)) / (1000 * 60));
+
+    if (document.getElementById('cleaning-days')) {
+      document.getElementById('cleaning-days').textContent = cleaningDays;
+      document.getElementById('cleaning-hours').textContent = cleaningHours;
+      document.getElementById('cleaning-minutes').textContent = cleaningMinutes;
+    }
   }
 
-  // Расчет времени
-  const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
-  const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-  const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+  // Implant promo timer
+  const implantTimeLeft = implantEndDate - now;
+  if (implantTimeLeft <= 0) {
+    const implantTimer = document.querySelector('#implant-promo .timer');
+    if (implantTimer) {
+      implantTimer.innerHTML = 'Акция завершена!';
+    }
+    const implantHeading = document.getElementById('implant-promo-heading');
+    if (implantHeading) {
+      implantHeading.textContent = 'Акция завершена';
+    }
+  } else {
+    const implantDays = Math.floor(implantTimeLeft / (1000 * 60 * 60 * 24));
+    const implantHours = Math.floor((implantTimeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const implantMinutes = Math.floor((implantTimeLeft % (1000 * 60 * 60)) / (1000 * 60));
 
-  // Обновление элементов
-  document.getElementById('days').textContent = days;
-  document.getElementById('hours').textContent = hours;
-  document.getElementById('minutes').textContent = minutes;
+    if (document.getElementById('implant-days')) {
+      document.getElementById('implant-days').textContent = implantDays;
+      document.getElementById('implant-hours').textContent = implantHours;
+      document.getElementById('implant-minutes').textContent = implantMinutes;
+    }
+  }
 }
-
-// Первый запуск и обновление каждую секунду
-updateTimer();
-setInterval(updateTimer, 1000);
 
 // =============================================
 // === Initialization ==========================
@@ -258,6 +285,10 @@ document.addEventListener('DOMContentLoaded', () => {
   animateOnScroll();
   setupCookieConsent();
   initModal();
+
+  // Initialize and update promo timers every second
+  updatePromoTimers();
+  setInterval(updatePromoTimers, 1000);
 });
 
 window.addEventListener('load', () => {

@@ -24,9 +24,21 @@
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
+  <url>
+    <lastmod>2025-04-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
 
   <url>
     <loc>https://макс-дентист.рф/services</loc>
+    <lastmod>2025-04-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://макс-дентист.рф/promo</loc>
     <lastmod>2025-04-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>

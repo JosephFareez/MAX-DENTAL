@@ -1217,6 +1217,7 @@ section[id] {
 .promo-form-container {
   flex: 1;
   min-width: 300px;
+  padding: 20px;
 }
 
 .promo-form {

@@ -367,6 +367,7 @@ a:focus {
   max-width: var(--container-width);
   margin: 0 auto;
   padding: 0 1rem;
+
 }
 
 section {
@@ -1179,8 +1180,10 @@ section[id] {
   background-color: var(--primary-light);
   padding: 4rem 0;
   margin: 3rem auto;
+  border: 2px;
   border-radius: var(--border-radius);
   box-shadow: var(--shadow);
+  border-color: var(--primary-dark);
   position: relative;
   overflow: hidden;
 }
@@ -1192,7 +1195,6 @@ section[id] {
   left: -50px;
   width: 200px;
   height: 200px;
-  background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path fill="rgba(42,127,143,0.1)" d="M26.9,14.1C17.8,23.2,9.6,33.5,14.4,43.4c4.8,9.9,24.1,9.2,33.9,16.9c9.8,7.7,8.4,24.8,18.4,29.3c10,4.5,25.1-4.4,31.2-14.3c6.1-9.9,2.3-25.2-4.1-35.1S75.2,14.1,65,9.8C54.8,5.5,36,5,26.9,14.1z"/></svg>');
   background-size: contain;
   opacity: 0.5;
 }
@@ -1334,6 +1336,8 @@ section[id] {
 @media (max-width: 768px) {
   .promo-content {
     flex-direction: column;
+    justify-content: center;
+
   }
 
   .timer {

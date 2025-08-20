@@ -225,10 +225,10 @@ function initModal() {
 // === Promotions Countdown Timers =============
 // =============================================
 function updatePromoTimers() {
-  // Timer for cleaning promo (July 30)
-  const cleaningEndDate = new Date('July 30, 2025 23:59:59').getTime();
-  // Timer for implant promo (July 31)
-  const implantEndDate = new Date('July 31, 2025 23:59:59').getTime();
+  // Timer for cleaning promo (September 30)
+  const cleaningEndDate = new Date('September 30, 2025 23:59:59').getTime();
+  // Timer for implant promo (September 30)
+  const implantEndDate = new Date('September 30, 2025 23:59:59').getTime();
   const now = new Date().getTime();
 
   // Cleaning promo timer
@@ -247,29 +247,6 @@ function updatePromoTimers() {
       document.getElementById('cleaning-days').textContent = cleaningDays;
       document.getElementById('cleaning-hours').textContent = cleaningHours;
       document.getElementById('cleaning-minutes').textContent = cleaningMinutes;
-    }
-  }
-
-  // Implant promo timer
-  const implantTimeLeft = implantEndDate - now;
-  if (implantTimeLeft <= 0) {
-    const implantTimer = document.querySelector('#implant-promo .timer');
-    if (implantTimer) {
-      implantTimer.innerHTML = 'Акция завершена!';
-    }
-    const implantHeading = document.getElementById('implant-promo-heading');
-    if (implantHeading) {
-      implantHeading.textContent = 'Акция завершена';
-    }
-  } else {
-    const implantDays = Math.floor(implantTimeLeft / (1000 * 60 * 60 * 24));
-    const implantHours = Math.floor((implantTimeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    const implantMinutes = Math.floor((implantTimeLeft % (1000 * 60 * 60)) / (1000 * 60));
-
-    if (document.getElementById('implant-days')) {
-      document.getElementById('implant-days').textContent = implantDays;
-      document.getElementById('implant-hours').textContent = implantHours;
-      document.getElementById('implant-minutes').textContent = implantMinutes;
     }
   }
 }

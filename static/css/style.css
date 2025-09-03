@@ -378,21 +378,21 @@ section[id] {
   scroll-margin-top: calc(var(--header-height) + 1rem);
 }
 
-/* Skip Link */
-.skip-link {
-  position: absolute;
-  top: -40px;
-  left: 0;
-  background: var(--primary);
-  color: var(--white);
-  padding: 0.5rem 1rem;
-  z-index: 9999;
-  transition: top 0.3s;
-}
+/*!* Skip Link *!*/
+/*.skip-link {*/
+/*  position: absolute;*/
+/*  top: -40px;*/
+/*  left: 0;*/
+/*  background: var(--primary);*/
+/*  color: var(--white);*/
+/*  padding: 0.5rem 1rem;*/
+/*  z-index: 9999;*/
+/*  transition: top 0.3s;*/
+/*}*/
 
-.skip-link:focus {
-  top: 0;
-}
+/*.skip-link:focus {*/
+/*  top: 0;*/
+/*}*/
 
 /* ==================== */
 /* ==== HEADER ======== */

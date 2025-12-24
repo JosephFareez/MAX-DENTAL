@@ -850,6 +850,9 @@ figure {
 .telegram {
   background: #0088cc;
 }
+.vkontakte {
+  background: #0077ff;
+}
 
 .call {
   background: var(--primary);
